@@ -24,9 +24,10 @@ namespace SportingGoodsStore.Tests
                     new Product {ProductID = 5, Name = "P5"}
                 }).AsQueryable());
 
-            var controller = new ProductController(mock.Object);
-
-            controller.PageSize = 3;
+            var controller = new ProductController(mock.Object)
+            {
+                PageSize = 3
+            };
 
             ProductsListViewModel result = controller.List(null, 2).Model as ProductsListViewModel;
             // Assert
@@ -80,8 +81,10 @@ namespace SportingGoodsStore.Tests
             }).AsQueryable());
 
             // Arrange - create a controller and make the page size 3 items
-            ProductController controller = new ProductController(mock.Object);
-            controller.PageSize = 3;
+            ProductController controller = new ProductController(mock.Object)
+            {
+                PageSize = 3
+            };
 
             // Action
             Product[] result =
