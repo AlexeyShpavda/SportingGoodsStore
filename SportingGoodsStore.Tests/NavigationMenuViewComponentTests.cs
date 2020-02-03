@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ViewComponents;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
 using SportingGoodsStore.WebApp.Components;
 using SportingGoodsStore.WebApp.Models;
@@ -47,11 +49,9 @@ namespace SportingGoodsStore.Tests
 
             target.ViewComponentContext = new ViewComponentContext
             {
-                ViewContext = new ViewContext
-                {
-                    RouteData = new RouteData()
-                }
+                ViewContext = new ViewContext()
             };
+
             target.RouteData.Values["category"] = categoryToSelect;
 
             // Action

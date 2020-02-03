@@ -23,6 +23,7 @@ namespace SportingGoodsStore.WebApp
             services.AddTransient<IProductRepository, EfProductRepository>();
             services.AddMvc();
             services.AddMemoryCache();
+            services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSession();
         }
 
