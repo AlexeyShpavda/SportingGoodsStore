@@ -5,6 +5,10 @@
     {
       "library": "twitter-bootstrap@4.4.1",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "fontawesome-iconpicker@3.2.0",
+      "destination": "wwwroot/lib/fontawesome/"
     }
   ]
 }
