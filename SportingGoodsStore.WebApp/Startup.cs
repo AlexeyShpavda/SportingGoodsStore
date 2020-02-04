@@ -24,6 +24,7 @@ namespace SportingGoodsStore.WebApp
             services.AddTransient<IProductRepository, EfProductRepository>();
             services.AddScoped(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IOrderRepository, EfOrderRepository>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddMvc().AddSessionStateTempDataProvider();
