@@ -2,38 +2,36 @@
 using Microsoft.AspNetCore.Mvc;
 using SportingGoodsStore.WebApp.Models;
 using SportingGoodsStore.WebApp.Models.Interfaces;
-using Microsoft.AspNetCore.Http;
-using SportingGoodsStore.WebApp.Infrastructure;
 
 namespace SportingGoodsStore.WebApp.Controllers
 {
     public class CartController : Controller
     {
         private IProductRepository repository;
+        private Cart cart;
 
-        public CartController(IProductRepository repo)
+        public CartController(IProductRepository repo, Cart cartService)
         {
             repository = repo;
+            cart = cartService;
         }
 
         public ViewResult Index(string returnUrl)
         {
             return View(new CartIndexViewModel
             {
-                Cart = GetCart(),
+                Cart = cart,
                 ReturnUrl = returnUrl
             });
         }
 
         public RedirectToActionResult AddToCart(int productId, string returnUrl)
         {
-            var product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
+            Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
 
             if (product != null)
             {
-                Cart cart = GetCart();
                 cart.AddItem(product, 1);
-                SaveCart(cart);
             }
 
             return RedirectToAction("Index", new { returnUrl });
@@ -45,20 +43,10 @@ namespace SportingGoodsStore.WebApp.Controllers
 
             if (product != null)
             {
-                Cart cart = GetCart();
                 cart.RemoveLine(product);
-                SaveCart(cart);
             }
-            return RedirectToAction("Index", new { returnUrl });
-        }
 
-        private Cart GetCart()
-        {
-            return HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart();
-        }
-        private void SaveCart(Cart cart)
-        {
-            HttpContext.Session.SetJson("Cart", cart);
+            return RedirectToAction("Index", new { returnUrl });
         }
     }
 }

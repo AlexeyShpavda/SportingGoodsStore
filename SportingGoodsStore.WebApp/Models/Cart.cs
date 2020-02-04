@@ -27,9 +27,9 @@ namespace SportingGoodsStore.WebApp.Models
         }
 
         public virtual void RemoveLine(Product product) =>
-        lineCollection.RemoveAll(l => l.Product.ProductID == product.ProductID);
+            lineCollection.RemoveAll(l => l.Product.ProductID == product.ProductID);
         public virtual decimal ComputeTotalValue() =>
-        lineCollection.Sum(e => e.Product.Price * e.Quantity);
+            lineCollection.Sum(e => e.Product.Price * e.Quantity);
         public virtual void Clear() => lineCollection.Clear();
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }
