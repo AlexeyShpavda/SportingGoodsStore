@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SportingGoodsStore.WebApp.Models
 {
-    public class FakeProductRepository : IProductRepository
+    public class FakeProductRepository /*: IProductRepository*/
     {
         public IQueryable<Product> Products => new List<Product>
         {

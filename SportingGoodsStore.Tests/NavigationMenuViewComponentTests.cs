@@ -45,11 +45,12 @@ namespace SportingGoodsStore.Tests
                 new Product {ProductID = 4, Name = "P2", Category = "Oranges"},
             }).AsQueryable<Product>());
 
-            var target = new NavigationMenuViewComponent(mock.Object);
-
-            target.ViewComponentContext = new ViewComponentContext
+            var target = new NavigationMenuViewComponent(mock.Object)
             {
-                ViewContext = new ViewContext()
+                ViewComponentContext = new ViewComponentContext
+                {
+                    ViewContext = new ViewContext()
+                }
             };
 
             target.RouteData.Values["category"] = categoryToSelect;
