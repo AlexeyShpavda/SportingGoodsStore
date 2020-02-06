@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportingGoodsStore.WebApp.Models;
 using SportingGoodsStore.WebApp.Models.Interfaces;
 using System.Linq;
 
 namespace SportingGoodsStore.WebApp.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IProductRepository repository;

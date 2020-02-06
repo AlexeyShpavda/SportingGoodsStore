@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportingGoodsStore.WebApp.Models;
 using SportingGoodsStore.WebApp.Models.Interfaces;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SportingGoodsStore.WebApp.Controllers
     public class OrderController : Controller
     {
         private IOrderRepository repository;
-        private Cart cart;
+        private readonly Cart cart;
 
         public OrderController(IOrderRepository repoService, Cart cartService)
         {
@@ -16,9 +17,11 @@ namespace SportingGoodsStore.WebApp.Controllers
             cart = cartService;
         }
 
+        [Authorize]
         public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
 
         [HttpPost]
+        [Authorize]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
